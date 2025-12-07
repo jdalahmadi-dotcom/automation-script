@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نموذج عرض سعر</title>
+    <style>
+      body {
+        font-family: 'Tahoma', sans-serif;
+        margin: 30px;
+        background-color: #f5f5f5;
+        color: #222;
+        direction: rtl;
+      }
+      h2 {
+        text-align: center;
+        color: #004d00;
+        margin-bottom: 25px;
+      }
+      .form-section {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 0 auto 20px auto;
+      }
+      label {
+        display: block;
+        margin-top: 12px;
+        font-weight: bold;
+      }
+      select,
+      input[type='number'],
+      input[type='text'] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background-color: #004d00;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 17px;
+        color: #004d00;
+        text-align: center;
+      }
+      .hidden {
+        display: none;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 6px;
+        text-align: center;
+      }
+      tfoot td {
+        font-weight: bold;
+      }
+      .offer-section {
+        margin-top: 25px;
+        background: #eaf5ea;
+        padding: 15px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>نموذج عرض أسعار الإيجارات</h2>
+
+    <div class="form-section">
+      <!-- اسم الجهة المستفيدة -->
+      <label>اسم الجهة المستفيدة:</label>
+      <input type="text" id="clientName" placeholder="اكتب اسم الجهة هنا" />
+
+      <!-- نوع الإيجار -->
+      <label>اختر نوع الإيجار:</label>
+      <select id="rentalType" onchange="showRentalFields()">
+        <option value="">-- اختر نوع الإيجار --</option>
+        <option value="sports">مرافق رياضية</option>
+      </select>
+
+      <!-- المرافق الرياضية -->
+      <div id="sportsFields" class="hidden">
+        <label>اختيار الملعب:</label>
+        <select id="stadiumType" onchange="updateSportsFields()">
+          <option value="">-- اختر --</option>
+          <option value="main">الملعب الرئيسي</option>
+          <option value="secondary">الملعب الرديف</option>
+        </select>
+
+        <div id="activitySection" class="hidden">
+          <label>نوع النشاط:</label>
+          <select id="activityType" onchange="updateSportsFields()">
+            <option value="">-- اختر --</option>
+            <option value="match">مباراة</option>
+            <option value="training">تمرين</option>
+          </select>
+        </div>
+
+        <div id="hoursSection" class="hidden">
+          <label>عدد الساعات:</label>
+          <select id="hours">
+            <option value="">-- اختر --</option>
+          </select>
+        </div>
+
+        <label>الموظفون للتشغيل:</label>
+        <div id="staffList">
+          <div>
+            <input type="checkbox" class="staff" data-price="800" />
+            مشرف هندسي
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="800"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="450" />
+            مهندس
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="450"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="400" />
+            إشراف تقني
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="400"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="450" />
+            إشراف إداري (شؤون طلاب)
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="450"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="350" />
+            فني صوتيات
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="350"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="350" />
+            فني إضاءة
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="350"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="250" />
+            فني كهربائي
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="250"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="250" />
+            فني تكييف
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="250"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="200" />
+            فني حرفي (سباك - نجار)
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="200"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="100" />
+            عامل نظافة
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="100"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="150" />
+            عاملة نظافة
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="150"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="300" />
+            رجل/سيدة أمن
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="300"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="250" />
+            فني إسعاف
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="250"
+            min="0"
+            placeholder="عدد الموظفين" />
+          <div>
+            <input type="checkbox" class="staff" data-price="450" />
+            السلامة المهنية
+          </div>
+          <input
+            type="number"
+            class="staffCount"
+            data-price="450"
+            min="0"
+            placeholder="عدد الموظفين" />
+        </div>
+
+        <label>عدد الحضور المتوقع:</label>
+        <select id="attendance">
+          <option value="">-- اختر --</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+          <option value="1000">1000</option>
+          <option value="2000">2000</option>
+        </select>
+      </div>
+
+      <button onclick="calculatePrice()">احسب السعر</button>
+      <button onclick="exportToWord()">تصدير إلى Word</button>
+    </div>
+
+    <div id="result" class="result"></div>
+    <div id="offerSection" class="offer-section hidden"></div>
+
+    <script>
+      function showRentalFields() {
+        const type = document.getElementById('rentalType').value;
+        document.getElementById('sportsFields').classList.add('hidden');
+        if (type === 'sports')
+          document.getElementById('sportsFields').classList.remove('hidden');
+      }
+
+      function updateSportsFields() {
+        const stadium = document.getElementById('stadiumType').value;
+        const activity = document.getElementById('activityType').value;
+        const hoursSection = document.getElementById('hoursSection');
+        const hoursSelect = document.getElementById('hours');
+
+        document.getElementById('activitySection').style.display =
+          stadium === 'secondary' ? 'block' : 'none';
+        hoursSection.style.display =
+          stadium === 'main' ||
+          (stadium === 'secondary' && activity === 'training')
+            ? 'block'
+            : 'none';
+
+        hoursSelect.innerHTML = '<option value="">-- اختر --</option>';
+
+        if (stadium === 'main') {
+          for (let i = 7; i <= 10; i++)
+            hoursSelect.innerHTML += `<option value="${i}">${i}</option>`;
+        } else if (stadium === 'secondary' && activity === 'training') {
+          [2, 4, 6].forEach(
+            h => (hoursSelect.innerHTML += `<option value="${h}">${h}</option>`)
+          );
+        }
+      }
+
+      function calculatePrice() {
+        const stadium = document.getElementById('stadiumType').value;
+        const activity = document.getElementById('activityType').value;
+        const hours = parseInt(document.getElementById('hours').value) || 0;
+
+        if (!stadium || (stadium === 'secondary' && !activity) || hours === 0) {
+          alert('يرجى اختيار كل البيانات المطلوبة');
+          return;
+        }
+
+        let price = 0;
+        if (stadium === 'main') {
+          price = 10000 + (hours - 7) * 1670;
+        } else if (stadium === 'secondary' && activity === 'match') {
+          price = 8000;
+        } else if (stadium === 'secondary' && activity === 'training') {
+          price = hours === 2 ? 5000 : hours === 4 ? 7000 : 8000;
+        }
+
+        let opFee = 0;
+        document.querySelectorAll('#staffList .staff').forEach((chk, i) => {
+          const countInput = document.querySelectorAll(
+            '#staffList .staffCount'
+          )[i];
+          if (chk.checked)
+            opFee += chk.dataset.price * parseInt(countInput.value || 0);
+        });
+
+        let total = price + opFee;
+        let tableHTML = `<table><thead><tr><th>البند</th><th>التفاصيل</th><th>المبلغ (ر.س)</th></tr></thead><tbody>
+<tr><td>الإيجار</td><td>سعر الملعب</td><td>${price}</td></tr>`;
+        if (opFee > 0)
+          tableHTML += `<tr><td>المصاريف التشغيلية</td><td>-</td><td>${opFee}</td></tr>`;
+        tableHTML += `</tbody><tfoot>
+<tr><td colspan="2">الإجمالي قبل الضريبة</td><td>${total.toFixed(2)}</td></tr>
+<tr><td colspan="2">الضريبة (15%)</td><td>${(total * 0.15).toFixed(2)}</td></tr>
+<tr><td colspan="2">الإجمالي بعد الضريبة</td><td>${(total * 1.15).toFixed(
+          2
+        )}</td></tr>
+</tfoot></table>`;
+
+        document.getElementById(
+          'result'
+        ).innerText = `الإجمالي قبل الضريبة: ${total.toFixed(2)} ر.س`;
+        document.getElementById('offerSection').innerHTML = tableHTML;
+        document.getElementById('offerSection').classList.remove('hidden');
+      }
+
+      function exportToWord() {
+        const client =
+          document.getElementById('clientName').value || 'السادة المحترمين';
+        const stadium =
+          document.getElementById('stadiumType').value === 'main'
+            ? 'الملعب الرئيسي'
+            : 'الملعب الرديف';
+        const hours = document.getElementById('hours').value || '';
+
+        const header = `<p style="font-size:small;">الموضوع: عرض سعر بشأن ايجار مرافق رياضية</p>
+<p>السادة / ${client} المحترمين</p>
+<p>السلام عليكم ورحمة الله وبركاته</p>
+<p>تهديكم الإدارة العامة للاستثمار أطيب التحايا والتقدير، ونرفق لسعادتكم عرض السعر الخاص بقيمة إيجار (${stadium}) لمدة (${hours}) ساعات بجامعة الملك عبدالعزيز.</p>`;
+
+        const content = document.getElementById('offerSection').innerHTML;
+        const footer = `<ul>
+<li>يجب قبول السعر خلال 5 أيام عمل بحد أقصى.</li>
+<li>السعر قابل للتغيير.</li>
+<li>يجب التأكد من الحجز قبل الفعالية بأسبوعين على الأقل.</li>
+</ul>
+<p>شاكرين لكم حسن تعاونكم،<br>مع أطيب التحيات،<br>الإدارة العامة للاستثمار – جامعة الملك عبدالعزيز</p>`;
+
+        const html = header + content + footer;
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `عرض سعر ل${client}.doc`;
+        link.click();
+      }
+    </script>
+  </body>
+</html>
